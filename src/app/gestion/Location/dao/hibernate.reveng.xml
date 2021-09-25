@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-schema="LOC"/>
+  <table-filter match-name="EXEMPLAIRE"/>
+  <table-filter match-name="COMPTE"/>
+  <table-filter match-name="FABRICATION"/>
+  <table-filter match-name="CLIENT"/>
+  <table-filter match-name="FABRICANT"/>
+  <table-filter match-name="LOCATION"/>
+  <table-filter match-name="LOCATAIRE"/>
+  <table-filter match-name="EMPRUNT"/>
+  <table-filter match-name="VOITURE"/>
+</hibernate-reverse-engineering>

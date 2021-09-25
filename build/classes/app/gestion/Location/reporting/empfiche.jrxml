@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empfiche" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="56c314c2-bd06-4f8a-b43d-d638d851dc13">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="223"/>
+	<parameter name="idemp" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     CLIENT."CIN" AS CLIENT_CIN,
+     CLIENT."NOM_CLT" AS CLIENT_NOM_CLT,
+     CLIENT."PRENOM" AS CLIENT_PRENOM,
+     CLIENT."ADRESSE" AS CLIENT_ADRESSE,
+     CLIENT."NUM_LOC" AS CLIENT_NUM_LOC,
+     CLIENT."EMPRUNTE" AS CLIENT_EMPRUNTE,
+     CLIENT."ETAT_CPT" AS CLIENT_ETAT_CPT,
+     EMPRUNT."NUM_EMP" AS EMPRUNT_NUM_EMP,
+     EMPRUNT."DATE_EMP" AS EMPRUNT_DATE_EMP,
+     EMPRUNT."DATEREST_PREVU" AS EMPRUNT_DATEREST_PREVU,
+     EMPRUNT."DATEREST_REEL" AS EMPRUNT_DATEREST_REEL,
+     EMPRUNT."TOTAL" AS EMPRUNT_TOTAL,
+     EMPRUNT."ID_LOCAT" AS EMPRUNT_ID_LOCAT,
+     EMPRUNT."CIN" AS EMPRUNT_CIN,
+     EMPRUNT."MATRICULE" AS EMPRUNT_MATRICULE,
+     EXEMPLAIRE."MATRICULE" AS EXEMPLAIRE_MATRICULE,
+     EXEMPLAIRE."TYPE" AS EXEMPLAIRE_TYPE,
+     EXEMPLAIRE."COLOR" AS EXEMPLAIRE_COLOR,
+     EXEMPLAIRE."PRIX" AS EXEMPLAIRE_PRIX,
+     EXEMPLAIRE."ETAT_EX" AS EXEMPLAIRE_ETAT_EX,
+     EXEMPLAIRE."NUM_LOC" AS EXEMPLAIRE_NUM_LOC,
+     EXEMPLAIRE."IDV" AS EXEMPLAIRE_IDV,
+     FABRICANT."IDF" AS FABRICANT_IDF,
+     FABRICANT."NOMF" AS FABRICANT_NOMF,
+     LOCATION."NUM_LOC" AS LOCATION_NUM_LOC,
+     LOCATION."NOM_LOC" AS LOCATION_NOM_LOC,
+     VOITURE."IDV" AS VOITURE_IDV,
+     VOITURE."NOMV" AS VOITURE_NOMV,
+     FABRICATION."IDV" AS FABRICATION_IDV,
+     FABRICATION."IDF" AS FABRICATION_IDF
+FROM
+     "LOC"."CLIENT" CLIENT INNER JOIN "LOC"."EMPRUNT" EMPRUNT ON CLIENT."CIN" = EMPRUNT."CIN"
+     INNER JOIN "LOC"."EXEMPLAIRE" EXEMPLAIRE ON EMPRUNT."MATRICULE" = EXEMPLAIRE."MATRICULE"
+     INNER JOIN "LOC"."LOCATION" LOCATION ON EXEMPLAIRE."NUM_LOC" = LOCATION."NUM_LOC"
+     INNER JOIN "LOC"."VOITURE" VOITURE ON EXEMPLAIRE."IDV" = VOITURE."IDV"
+     INNER JOIN "LOC"."FABRICATION" FABRICATION ON VOITURE."IDV" = FABRICATION."IDV"
+     INNER JOIN "LOC"."FABRICANT" FABRICANT ON FABRICATION."IDF" = FABRICANT."IDF"
+     AND LOCATION."NUM_LOC" = CLIENT."NUM_LOC"
+WHERE
+     EMPRUNT."NUM_EMP" = $P{idemp}]]>
+	</queryString>
+	<field name="CLIENT_CIN" class="java.lang.String"/>
+	<field name="CLIENT_NOM_CLT" class="java.lang.String"/>
+	<field name="CLIENT_PRENOM" class="java.lang.String"/>
+	<field name="CLIENT_ADRESSE" class="java.lang.String"/>
+	<field name="CLIENT_NUM_LOC" class="java.math.BigDecimal"/>
+	<field name="CLIENT_EMPRUNTE" class="java.math.BigDecimal"/>
+	<field name="CLIENT_ETAT_CPT" class="java.math.BigDecimal"/>
+	<field name="EMPRUNT_NUM_EMP" class="java.math.BigDecimal"/>
+	<field name="EMPRUNT_DATE_EMP" class="java.sql.Timestamp"/>
+	<field name="EMPRUNT_DATEREST_PREVU" class="java.sql.Timestamp"/>
+	<field name="EMPRUNT_DATEREST_REEL" class="java.sql.Timestamp"/>
+	<field name="EMPRUNT_TOTAL" class="java.math.BigDecimal"/>
+	<field name="EMPRUNT_ID_LOCAT" class="java.math.BigDecimal"/>
+	<field name="EMPRUNT_CIN" class="java.lang.String"/>
+	<field name="EMPRUNT_MATRICULE" class="java.lang.String"/>
+	<field name="EXEMPLAIRE_MATRICULE" class="java.lang.String"/>
+	<field name="EXEMPLAIRE_TYPE" class="java.lang.String"/>
+	<field name="EXEMPLAIRE_COLOR" class="java.lang.String"/>
+	<field name="EXEMPLAIRE_PRIX" class="java.math.BigDecimal"/>
+	<field name="EXEMPLAIRE_ETAT_EX" class="java.math.BigDecimal"/>
+	<field name="EXEMPLAIRE_NUM_LOC" class="java.math.BigDecimal"/>
+	<field name="EXEMPLAIRE_IDV" class="java.lang.String"/>
+	<field name="FABRICANT_IDF" class="java.math.BigDecimal"/>
+	<field name="FABRICANT_NOMF" class="java.lang.String"/>
+	<field name="LOCATION_NUM_LOC" class="java.math.BigDecimal"/>
+	<field name="LOCATION_NOM_LOC" class="java.lang.String"/>
+	<field name="VOITURE_IDV" class="java.lang.String"/>
+	<field name="VOITURE_NOMV" class="java.lang.String"/>
+	<field name="FABRICATION_IDV" class="java.lang.String"/>
+	<field name="FABRICATION_IDF" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="129" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="129" backcolor="#3399FF" uuid="7244afc2-ab45-4973-bc8a-ac386a5b7e8c"/>
+				<staticText>
+					<reportElement x="283" y="109" width="134" height="20" uuid="7bd012fc-fd3c-4268-950a-82a3081ba6ae"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Fiche d'emprunt:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="283" y="38" width="227" height="36" uuid="034ef8ee-e047-4f85-ac91-7525cdb7d3ec"/>
+					<textElement>
+						<font size="20" isBold="true" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LOCATION_NOM_LOC}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="183" y="38" width="100" height="36" uuid="6f94fd48-e2f7-45ed-aaab-b814de554138"/>
+					<textElement>
+						<font size="20" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Location]]></text>
+				</staticText>
+				<image>
+					<reportElement x="0" y="0" width="169" height="87" uuid="b88a7fc4-8905-45cc-9ef2-afc088f880ee"/>
+					<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\NetBeansProjects\\hibernateGestionLocation\\src\\app\\gestion\\Location\\img\\logo.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="441" splitType="Stretch">
+			<frame>
+				<reportElement isPrintRepeatedValues="false" x="29" y="46" width="502" height="91" forecolor="#0000FF" uuid="961d8331-5557-4ec0-9470-713502287f86"/>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" uuid="65ebb202-8b15-49b4-b069-d46a6a66b425"/>
+					<text><![CDATA[CIN:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="20" uuid="602963aa-f0e2-4eaa-af5e-9e8efe2665a8"/>
+					<text><![CDATA[Nom:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="100" y="0" width="100" height="20" uuid="9b8e8aa6-0df6-4315-891c-0699056cb67c"/>
+					<textFieldExpression><![CDATA[$F{CLIENT_CIN}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="20" width="100" height="20" uuid="bbc8ce80-63f9-46bb-ba91-ded21309c1b6"/>
+					<textFieldExpression><![CDATA[$F{CLIENT_NOM_CLT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="40" width="100" height="20" uuid="03bee959-4036-4d24-bf6d-4d842fde2a91"/>
+					<textFieldExpression><![CDATA[$F{CLIENT_PRENOM}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="60" width="100" height="20" uuid="9e9daa2b-ea5e-4b1f-aa5d-55699532dc49"/>
+					<textFieldExpression><![CDATA[$F{CLIENT_ADRESSE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="29" y="86" width="100" height="20" uuid="6a6f956d-588e-4bb6-be5e-e6cef4b11f58"/>
+				<text><![CDATA[Prénom:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="106" width="100" height="20" uuid="4b58f82d-6e5b-4310-82bf-48c1bdb8c306"/>
+				<text><![CDATA[Adresse:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="26" width="100" height="20" uuid="32802e68-9125-4b99-8528-b86360528b07"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Client:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="176" width="100" height="20" uuid="da3623e4-415e-4f0e-9b37-9f1f3360e479"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Voiture:]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="29" y="196" width="502" height="100" uuid="52542917-d55e-4f2b-ae24-6f33e4724f63"/>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" uuid="550b4371-6192-40eb-b00b-7aec6e081c4e"/>
+					<text><![CDATA[Nom:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="20" uuid="7316c787-9af5-4ed3-8d93-ee009c00c2a6"/>
+					<text><![CDATA[Matricule:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="40" width="100" height="20" uuid="5d034f58-9b22-44a9-980e-46e0157abaf5"/>
+					<text><![CDATA[Type:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="60" width="100" height="20" uuid="7b868fc4-6ccb-47ae-a4a9-3460776cba34"/>
+					<text><![CDATA[Couleur:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="80" width="100" height="20" uuid="9bc6d4bc-d015-486b-b710-0f9c141578b1"/>
+					<text><![CDATA[Prix:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="100" y="40" width="100" height="20" uuid="a4bd436e-38cd-4a08-9aa3-d318a67c5380"/>
+					<textFieldExpression><![CDATA[$F{EXEMPLAIRE_TYPE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="60" width="100" height="20" uuid="5b678764-735d-46d9-8a7f-ea2b7cea4d4c"/>
+					<textFieldExpression><![CDATA[$F{EXEMPLAIRE_COLOR}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="80" width="100" height="20" uuid="5fde6c76-1e98-4c90-a1dd-417116f8e68a"/>
+					<textFieldExpression><![CDATA[$F{EXEMPLAIRE_PRIX}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="20" width="100" height="20" uuid="8b1ab4c8-81db-405f-a168-5fa50d8ed168"/>
+					<textFieldExpression><![CDATA[$F{EXEMPLAIRE_MATRICULE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="0" width="100" height="20" uuid="c454ffcb-5e14-4e5d-a296-d558739dd08a"/>
+					<textFieldExpression><![CDATA[$F{FABRICANT_NOMF}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="200" y="0" width="100" height="20" uuid="42b6c3cc-5e83-47bc-9a16-1c7ea98fd48e"/>
+					<textFieldExpression><![CDATA[$F{VOITURE_NOMV}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="29" y="334" width="100" height="20" uuid="f6812b5a-9101-4bc5-8ef4-de87e3e9cceb"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Emprunt:]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="29" y="354" width="502" height="81" uuid="c1d3852e-52ff-49c9-a858-8cbb55111d46"/>
+				<staticText>
+					<reportElement x="0" y="0" width="100" height="20" uuid="5aec9e82-0ae6-4baf-8746-7de954b35ed3"/>
+					<text><![CDATA[ID Emprunt:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="20" width="100" height="20" uuid="28cc35a1-3f81-4a71-a1c9-720794dce99d"/>
+					<text><![CDATA[Date d'Emprunt:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="40" width="100" height="20" uuid="7ea15d32-7e86-46a3-a053-fc5f82e3d246"/>
+					<text><![CDATA[Date Rest Prevue:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="60" width="100" height="20" uuid="dfa3f634-38b9-45fe-ad9c-e117960d8a56"/>
+					<text><![CDATA[Total(dh):]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="100" y="0" width="100" height="20" uuid="26b72c0b-976b-4d3a-b90c-341d0ce62008"/>
+					<textFieldExpression><![CDATA[$F{EMPRUNT_NUM_EMP}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="20" width="100" height="20" uuid="b991565c-8ffe-4a32-8d4e-4881fb35204c"/>
+					<textFieldExpression><![CDATA[$F{EMPRUNT_DATE_EMP}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="40" width="100" height="20" uuid="4b9adfe1-71ec-4d98-ad10-8160b14f5d06"/>
+					<textFieldExpression><![CDATA[$F{EMPRUNT_DATEREST_PREVU}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="60" width="100" height="20" forecolor="#339900" uuid="6b6b2cda-3311-45bf-b7ca-469569bb4827"/>
+					<textFieldExpression><![CDATA[$F{EMPRUNT_TOTAL}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,123 @@
+ connect system/2000
+Connected.
+SQL> create user loc identified by loc;
+
+User created.
+
+SQL> grant connect , resource to loc;
+
+Grant succeeded.
+
+create table location(num_loc number(4) constraint pk_num_location primary key,nom_loc varchar2(30));
+
+create table voiture(idv varchar2(7) constraint pk_id_voiture primary key,nomv varchar2(30));
+
+create table fabricant(idf number(4) constraint pk_id_fabricant primary key,nomf varchar2(30));
+
+create table exemplaire(matricule varchar2(10) constraint pk_matricule_ex primary key,
+type varchar2(20),color varchar2(20),prix number(6,2),
+etat_ex number(1) Constraint Exmplr_etat_ex Check(etat_ex=0 or etat_ex=1),num_loc number(4),idv varchar2(7),
+Constraint Ex_num_loc_fk Foreign key(num_loc) references location(num_loc),
+Constraint Ex_id_voiture_fk Foreign key(idv) references voiture(idv));
+
+create table client(cin varchar2(10) constraint pk_cin_clt primary key,nom_clt varchar2(30),prenom varchar2(30),adresse varchar2(30),
+num_loc number(4),emprunte number(1) Constraint clt_emprunte_clt Check(emprunte=0 or emprunte=1),
+etat_cpt number(1) Constraint clt_etat_cmpt_clt Check(etat_cpt=0 or etat_cpt=1),
+constraint fk_num_loc_clt foreign key(num_loc) references location(num_loc));
+
+create table compte(login varchar2(30) primary key,mot_passe varchar2(30));
+
+create table locataire(id_locat number(4) constraint pk_id_locataire primary key,nom_locat varchar2(30),
+prenom_locat varchar2(30),login varchar2(30),num_loc number(4),
+constraint locataire_login_fk foreign key(login) references compte(login),
+constraint locataire_num_location_fk foreign key(num_loc) references location(num_loc));
+
+create table emprunt(num_emp number(7) constraint pk_num_emprunt primary key,
+Date_emp date default sysdate,DateRest_prevu date default sysdate+7,DateRest_Reel date,total number(6,2),
+id_locat number(4),cin varchar2(10),matricule varchar2(10),
+constraint emprunt_id_locataire_fk foreign key(id_locat) references locataire(id_locat),
+constraint emprunt_cin_client_fk foreign key(cin) references client(cin),
+constraint emprunt_matricule_ex_fk foreign key(matricule) references exemplaire(matricule));
+
+create table fabrication(idv varchar2(7),idf number(4), constraint pk_idv_idf_fabrication primary key(idv,idf),
+constraint fk_idv_fabrication foreign key(idv) references voiture(idv),
+constraint fk_idf_fabrication foreign key(idf) references fabricant(idf));
+
+
+
+create sequence seq_location increment by 1 start with 1 maxvalue 9999;
+
+create sequence seq_locataire increment by 1 start with 1 maxvalue 9999;
+
+create sequence seq_emp increment by 1 start with 1 maxvalue 9999;
+
+
+insert into location values(seq_location.nextval,'al aman');
+
+insert into location values(seq_location.nextval,'saada');
+
+insert into location values(seq_location.nextval,'safari');
+
+insert into voiture values('B123','i10');
+
+insert into voiture values('B456','picanto');
+
+insert into voiture values('B789','c3');
+
+insert into voiture values('A123','a3');
+
+insert into fabricant values(123,'Hunday');
+
+insert into fabricant values(456,'kia');
+
+insert into fabricant values(789,'citroen');
+
+insert into fabricant values(159,'audi');
+
+insert into exemplaire values('MA 5566','manuel','orange',150,1,1,'B123');
+
+insert into exemplaire values('MA 8845','automatique','jaune',190,1,1,'B123');
+
+insert into exemplaire values('MA 5889','manuel','gris',150,1,1,'B456');
+
+insert into exemplaire values('MA 5662','manuel','blanc',190,1,1,'B456');
+
+insert into exemplaire values('MA 5716','manuel','blanc',190,1,1,'B789');
+
+insert into exemplaire values('MA 5006','automatique','noir',250,1,1,'B789');
+
+insert into exemplaire values('MA 1022','automatique','vert',300,1,1,'A123');
+
+insert into exemplaire values('MA 7622','automatique','rouge',300,1,1,'A123');
+
+insert into client values('BH001122','hamdi','younes','casablanca',1,0,1);
+
+insert into client values('BH885450','halim','zakaria','casablanca',1,0,1);
+
+insert into client values('BH964402','hilali','rajaa','casablanca',1,0,1);
+
+insert into client values('BH012345','ahmadi','mohamed','casablanca',1,0,1);
+
+insert into client values('BH456123','mehdaoui','moad','casablanca',1,0,1);
+
+insert into client values('BH456777','rafi','mehdi','casablanca',1,0,1);
+
+insert into Compte values('youssef','warid');
+
+insert into Compte values ('zakaria','warid');
+
+insert into Compte values ('amine','warid');
+
+insert into locataire values(seq_locataire.nextval,'warid','youssef','youssef',1);
+
+insert into locataire values(seq_locataire.nextval,'warid','zakaria','zakaria',1);
+
+insert into locataire values(seq_locataire.nextval,'warid','amine','amine',1);
+
+insert into fabrication values('B123','123');
+
+insert into fabrication values('B789','789');
+
+insert into fabrication values('B456','456');
+
+insert into fabrication values('A123','159');

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="emprparjour" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9caa2c48-9ec2-40d8-83ba-a06934853dd6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+
+    to_char(EMPRUNT."DATE_EMP",'fmDay') jour,count(*) nbr,'Nombre Emprunts' serie
+
+FROM
+     "LOC"."EMPRUNT" EMPRUNT
+group by  to_char(EMPRUNT."DATE_EMP",'fmDay')
+order by  to_char(EMPRUNT."DATE_EMP",'fmDay') asc]]>
+	</queryString>
+	<field name="JOUR" class="java.lang.String"/>
+	<field name="NBR" class="java.math.BigDecimal"/>
+	<field name="SERIE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="214" y="44" width="254" height="42" uuid="930e848b-4824-4237-bd6e-6a7478d03fc9"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Emprunt par jour:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="214" height="86" uuid="58598bdd-e78c-4399-b79f-ae2c5e92d998"/>
+				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\NetBeansProjects\\hibernateGestionLocation\\src\\app\\gestion\\Location\\img\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="402" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="18" y="18" width="513" height="372" uuid="b6a3eb61-60d3-4b9a-927b-8886f1ba3dca"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{SERIE}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{JOUR}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{NBR}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
